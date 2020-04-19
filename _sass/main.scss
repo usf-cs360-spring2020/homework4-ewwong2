@@ -1,0 +1,96 @@
+.container {
+  text-align: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.section {
+  padding-top: 25px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mt-4 {
+  margin-top: 20px;
+}
+
+#main-menu .navbar-item span {
+  margin-right: 5px;
+}
+
+@media only screen and (max-width: 992px) {
+  /* For mobile phones: */
+  .container {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .container {
+    width: 100%;
+  }
+}
+
+.footer {
+  /*
+  Hack to extend footer:
+  https://stackoverflow.com/questions/9741701/how-can-i-extend-a-footer-to-bottom-of-page */
+  box-shadow: 0 50vh 0 50vh #d9a3a3;
+  background-color: #d9a3a3;
+}
+
+a.navbar-item:hover {
+  color: #910000;
+}
+
+table.grades tbody tr td:nth-child(1),
+table.grades tbody tr td:nth-child(2) {
+  text-align: center;
+}
+
+#main-title {
+  background-color: #db7b7b;
+  border-radius: 15px;
+  padding: 20px 0px;
+  margin: auto;
+}
+
+.button.is-red, .tag.is-red {
+  background-color: #db7b7b;
+  color: #330505;
+  transition: all 200ms ease-out 100ms;
+}
+
+.button.is-red:hover {
+  background-color: #b85353;
+  color: #1a0202;
+}
+
+body {
+  background-color: white;
+  text-align: center;
+
+  font-family: sans-serif;
+  font-size: 11pt;
+}
+
+#tooltip {
+  pointer-events: none;
+  position: absolute;
+}
+
+a:link, a:visited {
+  color: #444444;
+}
+
+a:hover, a:active {
+  color: #910000;
+}
+
+th {
+  text-align: right;
+}

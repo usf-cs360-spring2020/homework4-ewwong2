@@ -1,0 +1,40 @@
+<!-- Page navigation -->
+<!-- https://bulma.io/documentation/components/navbar/ -->
+<nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="main-menu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="main-menu" class="navbar-menu has-text-weight-medium">
+      <!-- Right navbar items -->
+      <div class="navbar-end">
+        <a class="navbar-item" href="{{ "/index.html" | prepend: site.baseurl }}" title="Home">
+          <span class="icon"><i class="fas fa-home"></i></span>
+          Home
+        </a>
+        <a class="navbar-item" href="{{ "/dendrogram.html" | prepend: site.baseurl }}" title="Dendrogram">
+          <span class="icon"><i class="fas fa-project-diagram"></i></span>
+          Dendrogram
+        </a>
+        <a class="navbar-item" href="{{ "/packing.html" | prepend: site.baseurl }}" title="Circle Packing">
+          <span class="icon"><i class="fas fa-circle"></i></span>
+          Circle Packing
+        </a>
+        <a class="navbar-item" href="{{ "/data.html" | prepend: site.baseurl }}" title="Data">
+          <span class="icon"><i class="fas fa-table"></i></span>
+          Data
+        </a>
+        <a class="navbar-item" href="{{ "/about.html" | prepend: site.baseurl }}" title="About">
+          <span class="icon"><i class="fas fa-address-card"></i></span>
+          About
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- End page navigation -->
