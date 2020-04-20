@@ -261,19 +261,6 @@ function filterData(data, time) {
   }
   let cluster = new Map();
 
-  let mapping = {
-    'B01': 'D02',
-    'B04': 'D02',
-    'B05': 'D02',
-    'B07': 'D02',
-    'B08': 'D02',
-    'B02': 'D03',
-    'B03': 'D03',
-    'B06': 'D03',
-    'B09': 'D03',
-    'B10': 'D03'
-  };
-
   for (row of data) {
     if (!cluster.has(row['Division'])) {
       cluster.set(row['Division'], {

@@ -8,7 +8,9 @@ title: Home
     This site aims to look further into Fire Department station structure from
     the
     <a href="{{ "/data.html" | prepend: site.baseurl }}">Fire Department calls for service</a>.
-    // TODO: Complete about
+    This site contains two visualizations that the same data in different ways.
+    In both, the paths are highlighted. It is easier to see certain patterns
+    such as overburdened stations with these sorts of visualizations.
   </p>
 </div>
 
@@ -39,21 +41,27 @@ title: Home
 
     <tbody>
       <tr>
-        <td>C & D</td>
+        <td>D</td>
         <td><i class="has-text-success fas fa-check-circle"></i></td>
         <td>
-          <a href="{{ "/map.html" | prepend: site.baseurl }}">Hexbin Map</a>
+          Data wrangling can be found
+          <a href="{{ "/data.html" | prepend: site.baseurl }}">here</a>
         </td>
+      </tr>
+      <tr>
+        <td>C</td>
+        <td><i class="has-text-success fas fa-check-circle"></i></td>
+        <td><a href="{{ "/dendrogram.html" | prepend: site.baseurl }}">Radial Dendrogram</a> with Filtering and Tooltips</td>
       </tr>
       <tr>
         <td>B</td>
         <td><i class="has-text-success fas fa-check-circle"></i></td>
-        <td>Tooltip for neighborhood and count of hexagon region.</td>
+        <td><a href="{{ "/packing.html" | prepend: site.baseurl }}">Circle Packing</a> with Tooltips</td>
       </tr>
       <tr>
         <td>A</td>
         <td><i class="has-text-success fas fa-check-circle"></i></td>
-        <td>Zoom on scroll.</td>
+        <td>Filtering by Month in <a href="{{ "/dendrogram.html" | prepend: site.baseurl }}">Radial Dendrogram</a></td>
       </tr>
     </tbody>
 

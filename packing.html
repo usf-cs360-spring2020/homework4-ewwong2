@@ -16,11 +16,53 @@ title: Circle Packing
       </svg>
 
       <figcaption>
-        TODO: Caption
+        Caption: This visualiation is a circle packing diagram. More information
+        about the data can be found
+        <a href="{{ "/data.html" | prepend: site.baseurl }}">here</a>.
       </figcaption>
     </figure>
   </div>
 
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="{{ "/assets/js/packing.js" | prepend: site.baseurl }}"></script>
+</div>
+<div class="mt-4">
+  <h3>Encoding</h3>
+  <p>
+    The red color encodes the number of fire department call for service that went
+    to a given station. The depth is encoded by the Viridis color scale, but has
+    no useful data other than the differentiate them from each other and from
+    the the leaf node color scale. The circle placement encode a parent to child
+    relationship by representing a "belongs to" relationship. The size also
+    encodes the number of fire department call for service that went to a given
+    station.
+  </p>
+</div>
+<div class="mt-4">
+  <h3>Interactivity</h3>
+  <p>
+    This visualization support details on demand through tooltips. The tooltip
+    shows the node that is being hovered over as well as the count and level (depth).
+  </p>
+</div>
+<div class="mt-4">
+  <h3>Wrangling</h3>
+  <p>
+    Details about data wrangling can be found
+    <a href="{{ "/data.html" | prepend: site.baseurl }}">here</a>.
+  </p>
+</div>
+<div class="mt-4">
+  <h3>Conclusion</h3>
+  <p>
+    It is even easier to see here (versus the dendrogram) that Station Area 1
+    has the highest count. We can also see that Division 2 and 3 have about the
+    comparable counts while the Station Areas that fall outside of that range
+    are much smaller.
+  </p>
+</div>
+<div class="mt-4" style="display: grid;">
+  <h3>Attribution</h3>
+  <a href="https://observablehq.com/@d3/circle-packing">Circle Packing</a>
+  <a href="https://observablehq.com/@sjengle/java-11-api-hierarchy-visualization">Class Hierarchical Visualization Example</a>
 </div>
