@@ -2,6 +2,7 @@
 layout: default
 title: Data
 ---
+<script>hljs.initHighlightingOnLoad();</script>
 <div class="mt-4">
   <h2 id="data">About</h2>
 
@@ -67,8 +68,117 @@ title: Data
       </tbody>
     </table>
   </div>
-  <h3>Filtering</h3>
+</div>
+<div class="mt-4">
+  <h3>Data Wrangling</h3>
   <p>
-    TODO: Data Wrangling
+    The raw data was downloaded from
+    <a href="https://datasf.org/opendata/">DataSF</a>.
+  </p>
+  <p>
+    Next, this was taken to Python pandas for data wrangling.
+  </p>
+  <pre style="text-align: left"><code class="python">import pandas as pd
+
+df = pd.read_csv('Fire_Department_Calls_for_Service.csv', low_memory=False)</code></pre>
+  <p>
+    Now we have our data in the dataframe. Note that the <code>low_memory=False</code>
+    is due to the fact that the dataset is quite large.
+  </p>
+  <p>
+    Now we can keep only the columns that we need. Note that the Division comes
+    from
+    <a href="https://sf-fire.org/fire-station-locations#divisions">sf-fire.org</a>.
+  </p>
+  <pre style="text-align: left"><code class="python">df = df[['Battalion', 'Station Area', 'Call Date']]</code></pre>
+  <p>
+    We can set up our divisions next. This is using a dict since the mapping
+    does not come directly from the dataset.
+  </p>
+  <pre style="text-align: left"><code class="python">mapping = dict.fromkeys(['B01', 'B04', 'B05', 'B07', 'B08'], 'D02')
+mapping.update(dict.fromkeys(['B02', 'B03', 'B06', 'B09', 'B10'], 'D03'))</code></pre>
+  <p>
+    After we add the division, we are ready to aggregate the data. Since this
+    data will be used for filtering later, we will not aggregate all the way.
+    Instead we will aggregate with year and month as well. We will also rename
+    our keys to allow for a more readable format that will be used later.
+  </p>
+  <pre style="text-align: left"><code class="python">def add_division(row):
+    row['Division'] = mapping[row['Battalion']] if row['Battalion'] in mapping else 'Unknown'
+    return row
+
+def rename(row):
+    row['Division'] = f'Division {row["Division"][-2:]}' if row['Division'] != 'Unknown' else 'Unknown'
+    row['Battalion'] = f'Battalion {row["Battalion"][-2:]}'
+    row['Station Area'] = f'Station Area {row["Station Area"][-2:]}'
+    return row
+
+df2 = df.groupby(['Battalion', 'Station Area', df['Call Date'].dt.year.rename('year'), df['Call Date'].dt.month.rename('month')]).agg({'count'}).rename(columns={'count': 'value'})
+df2.columns = df2.columns.droplevel()
+df2 = df2.reset_index()
+
+df2 = df2.apply(lambda row: add_division(row), axis=1)
+df2 = df2.apply(lambda row: rename(row), axis=1)</code></pre>
+  <p>
+    Since the data was not parsed in Python any further to allow for filtering,
+    the final steps to prepare for
+    <a href="https://github.com/d3/d3-hierarchy">d3.hierarchy</a> were done in
+    JavaScript.
+  </p>
+  <p>
+    After the data was read in from D3, a map containing the values was built.
+    This is a even further aggerggation. A more succinct option would be to use
+    the
+    <a href="https://github.com/d3/d3-collection#nests">d3.nest</a> or
+    <a href="https://github.com/d3/d3-collection#nest_rollup">d3.rollup</a>.
+    However, the code was originally written in Python and was directly
+    translated to JavaScript. If anyone were to attempt something similar,
+    <a href="http://learnjsdata.com/group_data.html">this</a> would be a good
+    place to start.
+  </p>
+  <pre style="text-align: left"><code class="javascript">for (row of data) {
+  if (!cluster.has(row['Division'])) {
+    cluster.set(row['Division'], {
+      'name': row['Division'],
+      'children': new Map()
+    });
+  }
+  if (!cluster.get(row['Division'])['children'].has(row['Battalion'])) {
+    cluster.get(row['Division'])['children'].set(row['Battalion'], {
+      'name': row['Battalion'],
+      'children': new Map()
+    });
+  }
+  let value = 0;
+  if (cluster.get(row['Division'])['children'].get(row['Battalion'])['children'].has(row['Station Area'])) {
+    value = cluster.get(row['Division'])['children'].get(row['Battalion'])['children'].get(row['Station Area'])['value'];
+  }
+  cluster.get(row['Division'])['children'].get(row['Battalion'])['children'].set(row['Station Area'], {
+    'name': row['Station Area'],
+    'value': value + row['value']
+  });
+}</code></pre>
+  <p>
+    Lastly, we can take our JavaScript mapping and convert it to objects
+    instead. The mapping as useful to finding keys, but it no longer needed in
+    our visualization code.
+  </p>
+  <pre style="text-align: left"><code class="javascript">let clusterJson = [];
+for (v of cluster.values()) {
+  let second = [];
+  for (v2 of v['children'].values()) {
+    v2['children'] = [...v2['children'].values()];
+    second.push(v2);
+  }
+  v['children'] = second;
+  clusterJson.push(v);
+}
+clusterJson = {
+  'name': 'Fire Department',
+  'children': clusterJson
+};</code></pre>
+  <p>
+    This gives us our wrangled code that is ready to be used in our
+    visualizations.
   </p>
 </div>

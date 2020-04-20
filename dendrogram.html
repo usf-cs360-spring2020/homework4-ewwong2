@@ -19,11 +19,55 @@ title: Dendrogram
       </svg>
 
       <figcaption>
-        TODO: Caption
+        Caption: This visualiation is a radial dendrogram. More information
+        about the data can be found
+        <a href="{{ "/data.html" | prepend: site.baseurl }}">here</a>.
       </figcaption>
     </figure>
   </div>
 
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="{{ "/assets/js/dendrogram.js" | prepend: site.baseurl }}"></script>
+</div>
+<div class="mt-4">
+  <h3>Encoding</h3>
+  <p>
+    The color encodes the number of fire department call for service that went
+    to a given station. The links encode a parent to child relationship from
+    inner to outer (ie. several station areas make up a battalion). The
+    inner nodes do not follow the color scale to prevent misrepresentation
+    of the data.
+  </p>
+</div>
+<div class="mt-4">
+  <h3>Interactivity</h3>
+  <p>
+    This visualization support details on demand through tooltips. The tooltip
+    shows the node that is being hovered over. Outer leaf nodes also show the
+    count in the tooltip.
+  </p>
+  <p>
+    Filtering is also supported with the month input. Select a month in the
+    month input to filter the data being shown in the dendrogram. If no dates
+    are chosen, the dendrogram represents all data from 4/2000 - 4/2020.
+  </p>
+</div>
+<div class="mt-4">
+  <h3>Wrangling</h3>
+  <p>
+    Details about data wrangling can be found
+    <a href="{{ "/data.html" | prepend: site.baseurl }}">here</a>.
+  </p>
+</div>
+<div class="mt-4">
+  <h3>Conclusion</h3>
+  <p>
+    Throughout time, it seems like Station Area 1 consistently gets one of the
+    most calls.
+  </p>
+</div>
+<div class="mt-4" style="display: grid;">
+  <h3>Attribution</h3>
+  <a href="https://observablehq.com/@d3/radial-dendrogram">Radial Dendrogram</a>
+  <a href="https://observablehq.com/@d3/cluster-dendrogram">Cluster Dendrogram</a>
 </div>
