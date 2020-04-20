@@ -1,21 +1,18 @@
 ---
 layout: default
-title: Dendrogram
+title: Circle Packing
 ---
 <div class="mt-4">
-  <h3>Radial Dendrogram</h3>
+  <h3>Circle Packing</h3>
   <p class="subtitle">Division >> Battalion >> Station Area</p>
-  <input type="month" name="start" min="2000-04" id="filter">
+  <!-- <input type="month" name="start" min="2000-04" id="filter"> -->
   <div class="flex-container">
     <figure>
-      <svg width="960" height="600" id="dendrogram">
-        <g id="links"></g>
-        <g id="circles"></g>
+      <svg width="960" height="600" id="packing">
+        <g id="plot"></g>
         <g id="legend">
           <g id="legend-color"></g>
         </g>
-
-        <g id="labels"></g>
       </svg>
 
       <figcaption>
@@ -25,5 +22,5 @@ title: Dendrogram
   </div>
 
   <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="{{ "/assets/js/dendrogram.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/assets/js/packing.js" | prepend: site.baseurl }}"></script>
 </div>

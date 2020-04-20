@@ -13,6 +13,14 @@
   justify-content: center;
 }
 
+.navbar {
+  background-color: transparent;
+}
+
+path.domain, .tick line {
+  stroke: white;
+}
+
 .mt-4 {
   margin-top: 20px;
 }
